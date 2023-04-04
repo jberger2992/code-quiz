@@ -5,20 +5,26 @@
 }
 
 header{
+    margin: 10px;
     text-align: center;
     height: 10dvh;
-    background-color:aqua;
-    border: 5px solid rgb(0, 140, 255);
 }
 
-header h1{
-    font-size: 300%;
-    margin-top: 12px;
+ul{
+    list-style: none;
+}
+
+li{
+    margin: 3px;
 }
 
 main{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 89vh;
+    height: 49vh;
+}
+
+footer{
+    text-align: center;
 }

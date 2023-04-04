@@ -9,17 +9,25 @@
 </head>
 <body>
     <header>
-        <h1>Code Quiz</h1>
+        <button id="start-button">Start</button>
+        <h3 id="score-h3"></h3>
+        <p id="score"></p>
     </header>
     <main>
-        <h2 id="question">Question</h2>
-        <button id="button-a">A</button>
-        <button id="button-b">B</button>
-        <button id="button-c">C</button>
-        <button id="button-d">D</button>
-        <section id="container"></section>
+        <section id="container">
+            <h2 id="question">Code Quiz</h2>
+            <ul>
+            <li id="li-a"></li><button id="button-a"></button>
+            <li id="li-b"></li><button id="button-b"></button>
+            <li id="li-c"></li><button id="button-c"></button>
+            <li id="li-d"></li><button id="button-d"></button>
+            </ul>
+        </section>
     </main>
+    <footer>
+        <h3 id="footer"></h3>
+    </footer>
 
-    <script scr="./script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
