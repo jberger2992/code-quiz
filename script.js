@@ -10,11 +10,13 @@ var liB = document.querySelector("#li-b");
 var liC = document.querySelector("#li-c");
 var liD = document.querySelector("#li-d");
 var scoreP = document.querySelector("#score");
-var headerScore = document.querySelector("#score-h3")
+var headerScore = document.querySelector("#score-h3");
+var hiscoreH3 = document.querySelector("#hiscore");
+var hiscore = document.querySelector("#hiscore-list");
 
+var submittedHiscore = "";
 var secondsLeft = 1000;
 var quizActive = false;
-var qOneActive = false;
 var countdownTimer = setInterval(function(){},1000);
 headerScore.textContent = "";
 scoreP.textContent = "";
@@ -25,21 +27,7 @@ function buttonReset(){
     buttonC.textContent = "";
     buttonD.textContent = "";
 }
-// function clickRemove(){
-//     buttonA.removeEventListener('click', clickA);
-//     buttonB.removeEventListener('click', clickB);
-//     buttonC.removeEventListener('click', clickC);
-//     buttonD.removeEventListener('click', clickD);
-// }
 
-//TODO:Create general timer
-                //    var countdownTimer = setInterval(function(){
-                //             if(quizActive = true){
-                //             secondsLeft--;
-                //             scoreP.textContent = secondsLeft;
-                //             }
-                //         },1000);
-//TODO:Create questions and answers
 function questionOne(){
     function clickRemove(){
         buttonA.removeEventListener('click', clickA);
@@ -362,6 +350,7 @@ function questionFive(){
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
+            hiScoreBoard();
         }, 1000);
     }
     document.querySelector("#button-b").addEventListener("click", clickB);
@@ -376,6 +365,7 @@ function questionFive(){
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
+            hiScoreBoard();
         }, 1000);
     }
     document.querySelector("#button-c").addEventListener("click", clickC);
@@ -390,6 +380,7 @@ function questionFive(){
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
+            hiScoreBoard();
         }, 1000);
     }
     document.querySelector("#button-d").addEventListener("click", clickD);
@@ -403,10 +394,39 @@ function questionFive(){
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
+            hiScoreBoard();
         }, 1000);
     }
 }
+var highscoresList = [];
+function loadHiscores(){
+  for (var i = 0; i < highscoresList.length; i++) {
+    var highscoresList = highscoresList[i];
 
+    var li = document.createElement("li");
+    li.textContent = highscoresList;
+    li.setAttribute("data-index", i);
+
+    hiscore.appendChild(li);
+  }
+}
+
+function hiScoreBoard(){
+    questionH2.textContent = "HISCORES";
+    hiscoreH3.textContent = "Your score: " + secondsLeft;
+    buttonA.textContent = "Submit Hiscore";
+    headerScore.textContent = "";
+    scoreP.textContent = "";
+    var hiscoreInitials = "";
+    loadHiscores();
+    document.querySelector("#button-a").addEventListener("click", submitHiscore);
+    function submitHiscore(){
+        var hiscorePrompt = prompt("Insert your initials.")
+        hiscoreInitials = hiscorePrompt.substring(0, 3);
+        submittedHiscore = hiscoreInitials.toUpperCase() + " " + secondsLeft;
+        alert(submittedHiscore);
+    }
+}
 //TODO:When start button is clicked, start quiz with timer
 document.querySelector("#start-button").addEventListener("click", function(){
     questionOne();
