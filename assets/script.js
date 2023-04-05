@@ -365,7 +365,7 @@ function hiScoreBoard(){
         submittedHiscore = hiscoreInitials.toUpperCase() + " " + secondsLeft;
         var li = document.createElement("li");
         li.textContent = submittedHiscore;
-        li.setAttribute("data-index", highscoresList.length++);
+        li.setAttribute("data-index", highscoresList.length);
         hiscore.appendChild(li);
         newScores();
         document.querySelector("#button-a").removeEventListener("click", submitHiscore);
