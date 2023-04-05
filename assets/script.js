@@ -1,3 +1,4 @@
+//link things to html
 var startBtn = document.querySelector("#start-button");
 var questionH2 = document.querySelector("#question");
 var buttonA = document.querySelector("#button-a");
@@ -14,6 +15,7 @@ var headerScore = document.querySelector("#score-h3");
 var hiscoreH3 = document.querySelector("#hiscore");
 var hiscore = document.querySelector("#hiscore-list");
 
+//global variables
 var submittedHiscore = "";
 var secondsLeft = 1000;
 var quizActive = false;
@@ -27,6 +29,9 @@ function buttonReset(){
     buttonC.textContent = "";
     buttonD.textContent = "";
 }
+
+//When question answered correctly, next question
+//Reduce time when question is answered incorrectly
 
 function questionOne(){
     function clickRemove(){
@@ -197,71 +202,6 @@ function questionThree(){
     }
 }
 
-function questionThree(){
-    function clickRemove(){
-        buttonA.removeEventListener('click', clickA);
-        buttonB.removeEventListener('click', clickB);
-        buttonC.removeEventListener('click', clickC);
-        buttonD.removeEventListener('click', clickD);
-    }
-    questionH2.textContent = "What can NOT be used to create a string in JavaScript?";
-    buttonA.textContent = "'Single Quotes'";
-    buttonB.textContent = '"Double Quotes"';
-    buttonC.textContent = "[Brackets]";
-    buttonD.textContent = "`Back Ticks`";
-    document.querySelector("#button-a").addEventListener("click", clickA);
-    function clickA(){
-        footerH3.textContent = ("INCORRECT");
-        liC.textContent = "[Brackets]";
-        secondsLeft = secondsLeft -10;
-        buttonReset();
-        setTimeout(() => {
-            liC.textContent = "";
-            footerH3.textContent = "";
-            questionFour();
-            clickRemove();
-        }, 1000);
-    }
-    document.querySelector("#button-b").addEventListener("click", clickB);
-    function clickB(){
-        footerH3.textContent = ("INCORRECT");
-        liC.textContent = "[Brackets]";
-        secondsLeft = secondsLeft -10;
-        buttonReset();
-        setTimeout(() => {
-            liC.textContent = "";
-            footerH3.textContent = "";
-            questionFour();
-            clickRemove();
-        }, 1000);
-    }
-    document.querySelector("#button-c").addEventListener("click", clickC);
-    function clickC(){
-        footerH3.textContent = ("CORRECT");
-        liC.textContent = "[Brackets]";
-        buttonReset();
-        setTimeout(() => {
-            liC.textContent = "";
-            footerH3.textContent = "";
-            questionFour();
-            clickRemove();
-        }, 1000);
-    }
-    document.querySelector("#button-d").addEventListener("click", clickD);
-    function clickD(){
-        footerH3.textContent = ("INCORRECT");
-        liC.textContent = "[Brackets]";
-        secondsLeft = secondsLeft -10;
-        buttonReset();
-        setTimeout(() => {
-            liC.textContent = "";
-            footerH3.textContent = "";
-            questionFour();
-            clickRemove();
-        }, 1000);
-    }
-}
-
 function questionFour(){
     function clickRemove(){
         buttonA.removeEventListener('click', clickA);
@@ -342,11 +282,11 @@ function questionFive(){
     document.querySelector("#button-a").addEventListener("click", clickA);
     function clickA(){
         footerH3.textContent = ("CORRECT");
-        liA.textContent = "Cascading Style Sheets";
+       liDtextContent = "Cascading Style Sheets";
         buttonReset();
         clearInterval(countdownTimer);
         setTimeout(() => {
-            liA.textContent = "";
+            liD.textContent = "";
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
@@ -356,12 +296,12 @@ function questionFive(){
     document.querySelector("#button-b").addEventListener("click", clickB);
     function clickB(){
         footerH3.textContent = ("INCORRECT");
-        liA.textContent = "Cascading Style Sheets";
+        liD.textContent = "Cascading Style Sheets";
         secondsLeft = secondsLeft -10;
         buttonReset();
         clearInterval(countdownTimer);
         setTimeout(() => {
-            liA.textContent = "";
+            liD.textContent = "";
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
@@ -371,12 +311,12 @@ function questionFive(){
     document.querySelector("#button-c").addEventListener("click", clickC);
     function clickC(){
         footerH3.textContent = ("INCORRECT");
-        liA.textContent = "Cascading Style Sheets";
+        liD.textContent = "Cascading Style Sheets";
         secondsLeft = secondsLeft -10;
         buttonReset();
         clearInterval(countdownTimer);
         setTimeout(() => {
-            liA.textContent = "";
+            liD.textContent = "";
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
@@ -386,11 +326,11 @@ function questionFive(){
     document.querySelector("#button-d").addEventListener("click", clickD);
     function clickD(){
         footerH3.textContent = ("CORRECT");
-        liA.textContent = "Cascading Style Sheets";
+        liD.textContent = "Cascading Style Sheets";
         buttonReset();
         clearInterval(countdownTimer);
         setTimeout(() => {
-            liA.textContent = "";
+            liD.textContent = "";
             footerH3.textContent = "";
             clickRemove();
             quizActive = false;
@@ -398,15 +338,14 @@ function questionFive(){
         }, 1000);
     }
 }
-var highscoresList = [];
+var highscoresList = ["ABC 123"];
 function loadHiscores(){
   for (var i = 0; i < highscoresList.length; i++) {
-    var highscoresList = highscoresList[i];
-
+    var singleScore = highscoresList[i];
     var li = document.createElement("li");
-    li.textContent = highscoresList;
+    li.textContent = singleScore;
     li.setAttribute("data-index", i);
-
+    
     hiscore.appendChild(li);
   }
 }
@@ -424,10 +363,20 @@ function hiScoreBoard(){
         var hiscorePrompt = prompt("Insert your initials.")
         hiscoreInitials = hiscorePrompt.substring(0, 3);
         submittedHiscore = hiscoreInitials.toUpperCase() + " " + secondsLeft;
-        alert(submittedHiscore);
+        var li = document.createElement("li");
+        li.textContent = submittedHiscore;
+        li.setAttribute("data-index", highscoresList.length++);
+        hiscore.appendChild(li);
+        newScores();
+        document.querySelector("#button-a").removeEventListener("click", submitHiscore);
+        buttonA.textContent = "";
     }
 }
-//TODO:When start button is clicked, start quiz with timer
+function newScores(){
+    highscoresList.push(submittedHiscore);
+    storeHiscores()
+}
+//When start button is clicked, start quiz with timer
 document.querySelector("#start-button").addEventListener("click", function(){
     questionOne();
     quizActive = true;
@@ -439,6 +388,16 @@ document.querySelector("#start-button").addEventListener("click", function(){
         scoreP.textContent = secondsLeft;
     },1000);
 });
-//TODO:When question answered correctly, next question
-//TODO:Reduce time when question is answered incorrectly
-//TODO:hiscore nonsense
+
+//hiscore nonsense
+
+function loadStorage() {
+    var storedHiscores = JSON.parse(localStorage.getItem("highscoresList"));
+    if (storedHiscores !== null) {
+      highscoresList = storedHiscores;
+  }
+}
+function storeHiscores() {
+    localStorage.setItem("highscoresList", JSON.stringify(highscoresList));
+}
+loadStorage()
